@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { sampleProducts } from "@/data";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex flex-col min-h-screen">
+      <header className="bg-gray-800 text-white p-4">
+        <nav className="container mx-auto flex justify-between">
+          <div className="text-2xl font-bold">tsamazona</div>
+          <ul className="flex items-center space-x-4">
+            <li>
+              <a href="/cart" className="text-white hover:text-gray-300">
+                Cart
+              </a>
+            </li>
+            <li>
+              <a href="/signin" className="text-white hover:text-gray-300">
+                Sign In
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <main className="flex-grow py-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {sampleProducts.map((product) => (
+              <div
+                key={product.slug}
+                className="border rounded-lg overflow-hidden shadow-md"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full max-w-[400px] object-cover"
+                />
+                <div className="p-4">
+                  <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
+                  <p className="text-gray-700">${product.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+
+      <footer className="bg-gray-800 text-white py-4">
+        <div className="text-center">All rights reserved</div>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
